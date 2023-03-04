@@ -1,1 +1,60 @@
 # WRF Install
+# Instalasi WRF, WPS, WRFPLUS, WRFDA 4DVar, Arwpost, NCEPLibs and WRFUPP
+
+# 1. WRF
+export WRF_EM_CORE=1
+export NETCDF=${netcdf install dir}
+export NETCDF4=1
+export HDF5=${hdf5 install dir}
+export jasper=${jasper install dir}
+export JASPERLIB=${jasper install dir}/lib
+export JASPERINC=${jasper install dir}/include
+export WRF_DA_CORE=0
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+./configure
+./compile em_real >& compile.log &
+
+# 2. WPS
+export JASPERLIB=${jasper install dir}/lib
+export JASPERINC=${jasper install dir}/include
+export WRF_DIR=../WRF
+export NETCDF=${netcdf install dir}
+ ./configure 
+./compile >& compile.log &
+# Add lib and include png and zlib inside configure.wps
+
+# 3.WRFPLUS
+export NETCDF=${netcdf install dir}
+./configure wrfplus
+./compile wrfplus >& compile.log &
+
+# 4. WRFDA 4DVAR
+Export WRFPLUS_DIR=${wrfplus install dir}
+export NETCDF=${netcdf install dir}
+export NETCDF4=1
+export HDF5=${hdf5 install dir}
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+./configure 4dvar
+./compile -j 10 all_wrfvar >& compile.log &
+# wrfda v 4.3.3 should compile with single proc
+
+# 5.ARWPost
+export NETCDF=${netcdf install dir}
+./configure
+# edit file src/Makefile add –lnetcdff
+./compile
+
+# 6. NCEPLibs
+git clone https://github.com/NOAA-EMC/NCEPLIBS
+mkdir –p NCEPLIBS/build
+cd NCEPLIBS/build
+cmake -DCMAKE_PREFIX_PATH="${libpng install dir};${jasper install dir};${libjpeg install dir};${netcdf install dir};${hdf5 install dir}"  -DCMAKE_INSTALL_PREFIX=${nceplibs install dir} -DTCLMOD=ON ../NCEPLIBS
+make
+
+# 7. WRFUPP
+# https://dtcenter.org/community-code/unified-post-processor-upp-wrf/upp-user-release-version-4-1-0
+export NETCDF=${netcdf install dir}
+export NCEPLIBS_DIR=${nceplibs install dir}
+./configure
+./compile
+# edit nceplibs libs and include inside configure.upp add libpng, libjpeg and jasper
