@@ -48,7 +48,7 @@ export NETCDF=${netcdf install dir}
 git clone https://github.com/NOAA-EMC/NCEPLIBS
 mkdir –p NCEPLIBS/build
 cd NCEPLIBS/build
-cmake -DCMAKE_PREFIX_PATH="${libpng install dir};${jasper install dir};${libjpeg install dir};${netcdf install dir};${hdf5 install dir}"  -DCMAKE_INSTALL_PREFIX=${nceplibs install dir} -DTCLMOD=ON ../NCEPLIBS
+cmake -DCMAKE_PREFIX_PATH="${libpng install dir};${jasper install dir};${libjpeg install dir};${netcdf install dir};${hdf5 install dir}"  -DCMAKE_INSTALL_PREFIX=${nceplibs install dir} -DTCLMOD=ON ../
 make
 
 # 7. WRFUPP
