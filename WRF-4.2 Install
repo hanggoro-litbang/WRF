@@ -49,7 +49,9 @@ git clone https://github.com/NOAA-EMC/NCEPLIBS
 mkdir –p NCEPLIBS/build
 cd NCEPLIBS/build
 cmake -DCMAKE_PREFIX_PATH="${libpng install dir};${jasper install dir};${libjpeg install dir};${netcdf install dir};${hdf5 install dir}"  -DCMAKE_INSTALL_PREFIX=${nceplibs install dir} -DTCLMOD=ON ../
-make
+mak
+./deploy_modulefiles.sh 
+# look for modulefile inside installed dir
 
 # 7. WRFUPP
 # https://dtcenter.org/community-code/unified-post-processor-upp-wrf/upp-user-release-version-4-1-0
