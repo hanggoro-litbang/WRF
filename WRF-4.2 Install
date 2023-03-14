@@ -48,9 +48,9 @@ export NETCDF=${netcdf install dir}
 git clone https://github.com/NOAA-EMC/NCEPLIBS
 mkdir –p NCEPLIBS/build
 cd NCEPLIBS/build
-cmake -DCMAKE_PREFIX_PATH="${libpng install dir};${jasper install dir};${libjpeg install dir};${netcdf install dir};${hdf5 install dir}"  -DCMAKE_INSTALL_PREFIX=${nceplibs install dir} -DTCLMOD=ON ../
-mak
-./deploy_modulefiles.sh 
+cmake -DCMAKE_PREFIX_PATH="${libpng install dir};${jasper install dir};${libjpeg install dir};${netcdf install dir};${hdf5 install dir}"  \
+-DCMAKE_INSTALL_PREFIX=${nceplibs install dir} -DTCLMOD=ON -DDEPLOY=ON ../
+make tcl
 # look for modulefile inside installed dir
 
 # 7. WRFUPP
