@@ -15,6 +15,7 @@ export WRFIO_NCD_LARGE_FILE_SUPPORT=1
 ./compile em_real >& compile.log &
 
 # 2. WPS
+export jasper=${jasper install dir}
 export JASPERLIB=${jasper install dir}/lib
 export JASPERINC=${jasper install dir}/include
 export WRF_DIR=../WRF
