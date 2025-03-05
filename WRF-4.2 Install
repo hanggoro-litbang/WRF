@@ -13,6 +13,11 @@ export WRF_DA_CORE=0
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
 ./configure
 ./compile em_real >& compile.log &
+ls -ls main/*.exe
+wrf.exe (model executable)
+real.exe (real data initialization)
+ndown.exe (one-way nesting)
+tc.exe (for tc bogusing--serial only)
 
 # 2. WPS
 export jasper=${jasper install dir}
@@ -22,12 +27,16 @@ export WRF_DIR=../WRF
 export NETCDF=${netcdf install dir}
  ./configure 
 ./compile >& compile.log &
+geogrid.exe -> geogrid/src/geogrid.exe
+ungrib.exe -> ungrib/src/ungrib.exe
+metgrid.exe -> metgrid/src/metgrid.exe
 # Add lib and include png and zlib inside configure.wps
 
 # 3.WRFPLUS
 export NETCDF=${netcdf install dir}
 ./configure wrfplus
 ./compile wrfplus >& compile.log &
+ls -al main/wrfplus.exe
 
 # 4. WRFDA 4DVAR
 Export WRFPLUS_DIR=${wrfplus install dir}
@@ -37,6 +46,7 @@ export HDF5=${hdf5 install dir}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
 ./configure 4dvar
 ./compile -j 10 all_wrfvar >& compile.log &
+ls -l var/build/*exe var/obsproc/src/obsproc.exe
 # wrfda v 4.3.3 should compile with single proc
 
 # 5.ARWPost
